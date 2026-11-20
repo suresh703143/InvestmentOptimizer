@@ -1,0 +1,409 @@
+/* ============================================
+   DASHBOARD PAGE STYLES
+   ============================================ */
+
+/* Sidebar */
+.sidebar {
+    background: var(--current-bg-secondary);
+    border: 1px solid var(--current-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    box-shadow: var(--shadow-lg);
+}
+
+.sidebar h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.3rem;
+}
+
+.config-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.config-section label {
+    display: block;
+    color: var(--current-text-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.95rem;
+}
+
+.config-section input,
+.config-section select {
+    margin-bottom: var(--spacing-sm);
+}
+
+.input-value {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: var(--radius-md);
+}
+
+#optimizeBtn {
+    width: 100%;
+    margin: var(--spacing-lg) 0;
+    position: relative;
+}
+
+#optimizeBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.quick-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--current-border);
+}
+
+.quick-stat {
+    background: var(--current-bg-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quick-stat .label {
+    color: var(--current-text-secondary);
+    font-size: 0.9rem;
+}
+
+.quick-stat .value {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Asset Selection */
+.assets-controls {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+#assetSearch {
+    background: var(--current-bg-tertiary);
+    padding: var(--spacing-md);
+}
+
+#assetFilter {
+    background: var(--current-bg-tertiary);
+}
+
+.assets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.asset-card {
+    background: var(--current-bg-tertiary);
+    border: 2px solid var(--current-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.asset-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    z-index: -1;
+    transition: left var(--transition-base);
+}
+
+.asset-card:hover::before {
+    left: 0;
+    opacity: 0.1;
+}
+
+.asset-card.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.asset-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+}
+
+.asset-symbol {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.asset-name {
+    color: var(--current-text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.asset-price {
+    color: var(--current-text-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.asset-change {
+    font-size: 0.9rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: inline-block;
+}
+
+.asset-change.positive {
+    color: var(--success-color);
+    background: rgba(81, 207, 102, 0.1);
+}
+
+.asset-change.negative {
+    color: var(--danger-color);
+    background: rgba(255, 107, 107, 0.1);
+}
+
+/* Visualization Section */
+.visualization-section {
+    position: relative;
+}
+
+.dp-visualization {
+    background: var(--current-bg-tertiary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+#dpTableCanvas {
+    flex: 1;
+    max-height: 400px;
+}
+
+.dp-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.animation-time {
+    color: var(--current-text-secondary);
+    font-weight: 500;
+}
+
+#animationTime {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Results Section */
+.results-section {
+    margin-top: var(--spacing-2xl);
+}
+
+.results-grid {
+    display: grid;
+    gap: var(--spacing-xl);
+}
+
+.result-card {
+    background: var(--current-bg-tertiary);
+    border: 1px solid var(--current-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+}
+
+.result-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.result-card h3 {
+    color: var(--current-text-primary);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.2rem;
+}
+
+.result-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.asset-item {
+    background: var(--current-bg-secondary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--current-border);
+}
+
+.asset-item-symbol {
+    color: var(--primary-color);
+    font-weight: 700;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.asset-item-allocation {
+    color: var(--current-text-secondary);
+    font-size: 0.9rem;
+}
+
+.summary-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.metric-label {
+    color: var(--current-text-secondary);
+    font-size: 0.9rem;
+}
+
+.metric-value {
+    color: var(--current-text-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.placeholder {
+    color: var(--current-text-tertiary);
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+/* Portfolio Chart */
+#portfolioChart {
+    max-height: 300px;
+}
+
+/* Comparison Table */
+.comparison-table {
+    background: var(--current-bg-tertiary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-top: var(--spacing-lg);
+}
+
+.comparison-table table {
+    margin: 0;
+}
+
+.comparison-table thead {
+    background: var(--current-bg-secondary);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.actions .btn {
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .page-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .assets-controls {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .assets-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--spacing-md);
+    }
+
+    .summary-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actions .btn {
+        width: 100%;
+    }
+
+    .dp-controls {
+        flex-direction: column;
+    }
+
+    .dp-controls .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .assets-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+
+    .asset-card {
+        padding: var(--spacing-md);
+    }
+
+    .summary-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .result-card {
+        padding: var(--spacing-lg);
+    }
+
+    .result-content {
+        grid-template-columns: 1fr;
+    }
+}

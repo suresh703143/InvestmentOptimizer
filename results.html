@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results & Analytics - Smart-Grow</title>
+    <meta name="description" content="Smart-Grow Investment Optimization Framework - Advanced Algorithm-Based Portfolio Optimization">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/results.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Smart-Grow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="market-data.html" class="nav-link">Market Data</a></li>
+                <li><a href="algorithms.html" class="nav-link">Algorithms</a></li>
+                <li><a href="results.html" class="nav-link active">Results</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container" style="grid-template-columns: 1fr;">
+        <main class="main-content">
+            <!-- Header -->
+            <section class="results-header">
+                <h1>Portfolio Analysis & Results</h1>
+                <p>Comprehensive optimization results and performance analytics</p>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="exportPdfBtn">📊 Export as PDF</button>
+                    <button class="btn btn-secondary" id="printBtn">🖨️ Print</button>
+                    <button class="btn btn-secondary" id="shareBtn">📤 Share</button>
+                </div>
+            </section>
+
+            <!-- Executive Summary -->
+            <section class="results-section">
+                <h2>Executive Summary</h2>
+                <div class="summary-cards">
+                    <div class="summary-card primary">
+                        <div class="card-icon">💰</div>
+                        <div class="card-content">
+                            <span class="card-label">Total Investment</span>
+                            <span class="card-value" id="summaryInvestment">₹50,000</span>
+                            <span class="card-subtext">Allocated</span>
+                        </div>
+                    </div>
+                    <div class="summary-card success">
+                        <div class="card-icon">📈</div>
+                        <div class="card-content">
+                            <span class="card-label">Expected Return</span>
+                            <span class="card-value" id="summaryReturn">₹12,500</span>
+                            <span class="card-subtext">+25% of investment</span>
+                        </div>
+                    </div>
+                    <div class="summary-card info">
+                        <div class="card-icon">⚠️</div>
+                        <div class="card-content">
+                            <span class="card-label">Portfolio Risk</span>
+                            <span class="card-value" id="summaryRisk">18%</span>
+                            <span class="card-subtext">Within threshold</span>
+                        </div>
+                    </div>
+                    <div class="summary-card accent">
+                        <div class="card-icon">⭐</div>
+                        <div class="card-content">
+                            <span class="card-label">Efficiency Score</span>
+                            <span class="card-value" id="summaryScore">92%</span>
+                            <span class="card-subtext">Excellent optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Composition -->
+            <section class="results-section">
+                <h2>Portfolio Composition</h2>
+                <div class="composition-grid">
+                    <div class="chart-container">
+                        <h3>Asset Allocation</h3>
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Risk Distribution</h3>
+                        <canvas id="riskChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Selected Assets Table -->
+            <section class="results-section">
+                <h2>Selected Assets</h2>
+                <div class="table-container">
+                    <table class="assets-table">
+                        <thead>
+                            <tr>
+                                <th>Asset Symbol</th>
+                                <th>Asset Name</th>
+                                <th>Allocation</th>
+                                <th>Amount</th>
+                                <th>Expected Return</th>
+                                <th>Risk Level</th>
+                                <th>ROI Potential</th>
+                            </tr>
+                        </thead>
+                        <tbody id="assetsTableBody">
+                            <tr>
+                                <td colspan="7" class="placeholder">No optimization results yet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Performance Charts -->
+            <section class="results-section">
+                <h2>Performance Analysis</h2>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Return vs Risk Scatter</h3>
+                        <canvas id="returnRiskScatter"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Historical Performance</h3>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Monthly Returns Distribution</h3>
+                        <canvas id="returnsDistribution"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Cumulative Growth</h3>
+                        <canvas id="cumulativeGrowth"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Risk Analytics -->
+            <section class="results-section">
+                <h2>Risk Analytics</h2>
+                <div class="risk-metrics">
+                    <div class="risk-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Value at Risk (VaR)</span>
+                            <span class="metric-value var-value" id="varValue">-₹2,500</span>
+                        </div>
+                        <p class="metric-description">95% confidence level</p>
+                    </div>
+                    <div class="risk-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Sharpe Ratio</span>
+                            <span class="metric-value" id="sharpeRatio">1.85</span>
+                        </div>
+                        <p class="metric-description">Risk-adjusted return</p>
+                    </div>
+                    <div class="risk-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Beta</span>
+                            <span class="metric-value" id="betaValue">0.92</span>
+                        </div>
+                        <p class="metric-description">Market sensitivity</p>
+                    </div>
+                    <div class="risk-card">
+                        <div class="metric-header">
+                            <span class="metric-title">Maximum Drawdown</span>
+                            <span class="metric-value" id="maxDrawdown">-15%</span>
+                        </div>
+                        <p class="metric-description">Worst-case scenario</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Algorithm Performance -->
+            <section class="results-section">
+                <h2>Algorithm Performance Comparison</h2>
+                <div class="algo-comparison">
+                    <div class="comparison-chart-container">
+                        <h3>Algorithm Efficiency</h3>
+                        <canvas id="algoEfficiency"></canvas>
+                    </div>
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Dynamic Programming</th>
+                                    <th>Greedy Algorithm</th>
+                                    <th>Winner</th>
+                                </tr>
+                            </thead>
+                            <tbody id="algoComparisonBody">
+                                <tr>
+                                    <td>Execution Time</td>
+                                    <td id="dpExecTime">-</td>
+                                    <td id="greedyExecTime">-</td>
+                                    <td id="timeWinner">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Optimization Score</td>
+                                    <td id="dpOptScore">-</td>
+                                    <td id="greedyOptScore">-</td>
+                                    <td id="scoreWinner">🥇</td>
+                                </tr>
+                                <tr>
+                                    <td>Return Achievement</td>
+                                    <td id="dpReturn">-</td>
+                                    <td id="greedyReturn">-</td>
+                                    <td id="returnWinner">-</td>
+                                </tr>
+                                <tr>
+                                    <td>Risk Adherence</td>
+                                    <td id="dpRisk">-</td>
+                                    <td id="greedyRisk">-</td>
+                                    <td id="riskWinner">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations -->
+            <section class="results-section">
+                <h2>AI-Powered Recommendations</h2>
+                <div class="recommendations-grid">
+                    <div class="recommendation-card">
+                        <div class="rec-icon">💡</div>
+                        <h3>Portfolio Rebalancing</h3>
+                        <p>Consider rebalancing quarterly to maintain optimal risk-return ratio</p>
+                        <button class="btn btn-small btn-secondary">Learn More</button>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="rec-icon">📍</div>
+                        <h3>Diversification Opportunity</h3>
+                        <p>You can add 2-3 uncorrelated assets to improve stability</p>
+                        <button class="btn btn-small btn-secondary">Explore</button>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="rec-icon">⚡</div>
+                        <h3>Performance Optimization</h3>
+                        <p>Your current allocation achieves 92% efficiency. Premium sector provides 5% gain</p>
+                        <button class="btn btn-small btn-secondary">View Options</button>
+                    </div>
+                    <div class="recommendation-card">
+                        <div class="rec-icon">🛡️</div>
+                        <h3>Risk Mitigation</h3>
+                        <p>Add defensive stocks to reduce portfolio volatility by 3%</p>
+                        <button class="btn btn-small btn-secondary">Adjust</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scenario Analysis -->
+            <section class="results-section">
+                <h2>Scenario Analysis</h2>
+                <div class="scenario-controls">
+                    <button class="scenario-btn active" data-scenario="bull">🚀 Bull Market</button>
+                    <button class="scenario-btn" data-scenario="bear">🐻 Bear Market</button>
+                    <button class="scenario-btn" data-scenario="stable">⏸️ Stable Market</button>
+                    <button class="scenario-btn" data-scenario="crisis">⚠️ Market Crisis</button>
+                </div>
+                <div class="scenario-chart">
+                    <canvas id="scenarioChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Backtesting Results -->
+            <section class="results-section">
+                <h2>Historical Backtesting</h2>
+                <div class="backtest-grid">
+                    <div class="backtest-card">
+                        <h3>1-Year Backtest</h3>
+                        <div class="backtest-metrics">
+                            <div class="metric">
+                                <span class="label">Total Return</span>
+                                <span class="value">+28.5%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">Win Rate</span>
+                                <span class="value">72%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">Max Drawdown</span>
+                                <span class="value">-12%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="backtest-card">
+                        <h3>5-Year Backtest</h3>
+                        <div class="backtest-metrics">
+                            <div class="metric">
+                                <span class="label">Annual Return</span>
+                                <span class="value">+18.2%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">Sharpe Ratio</span>
+                                <span class="value">1.92</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">Recovery Time</span>
+                                <span class="value">4.2 months</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container full-width">
+                        <h3>Backtest Performance Comparison</h3>
+                        <canvas id="backtestChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Export and Actions -->
+            <section class="results-section">
+                <h2>Export & Actions</h2>
+                <div class="actions-grid">
+                    <button class="action-btn">
+                        <span class="action-icon">📊</span>
+                        <span>Export Report (PDF)</span>
+                    </button>
+                    <button class="action-btn">
+                        <span class="action-icon">📥</span>
+                        <span>Download CSV</span>
+                    </button>
+                    <button class="action-btn">
+                        <span class="action-icon">📧</span>
+                        <span>Email Results</span>
+                    </button>
+                    <button class="action-btn">
+                        <span class="action-icon">🔗</span>
+                        <span>Generate Link</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/results.js"></script>
+</body>
+</html>

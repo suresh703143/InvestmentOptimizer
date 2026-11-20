@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimization Dashboard - Smart-Grow</title>
+    <meta name="description" content="Smart-Grow Investment Optimization Framework - Advanced Algorithm-Based Portfolio Optimization">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Smart-Grow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="market-data.html" class="nav-link">Market Data</a></li>
+                <li><a href="algorithms.html" class="nav-link">Algorithms</a></li>
+                <li><a href="results.html" class="nav-link">Results</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Configuration</h3>
+            <div class="config-section">
+                <label for="investmentAmount">Investment Amount (₹)</label>
+                <input type="number" id="investmentAmount" min="1000" max="1000000" value="50000" step="1000">
+                <span class="input-value">₹50,000</span>
+            </div>
+
+            <div class="config-section">
+                <label for="riskThreshold">Risk Threshold (%)</label>
+                <input type="range" id="riskThreshold" min="5" max="50" value="20">
+                <span class="input-value">20%</span>
+            </div>
+
+            <div class="config-section">
+                <label for="expectedReturn">Expected Return (%)</label>
+                <input type="range" id="expectedReturn" min="5" max="100" value="25">
+                <span class="input-value">25%</span>
+            </div>
+
+            <div class="config-section">
+                <label for="algorithmSelect">Algorithm</label>
+                <select id="algorithmSelect">
+                    <option value="dp">Dynamic Programming</option>
+                    <option value="greedy">Greedy Algorithm</option>
+                    <option value="hybrid">Hybrid (Compare Both)</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" id="optimizeBtn">
+                <span class="btn-text">Optimize Portfolio</span>
+                <span class="btn-loader hidden"></span>
+            </button>
+
+            <div class="quick-stats">
+                <div class="quick-stat">
+                    <span class="label">Budget</span>
+                    <span class="value" id="quickBudget">₹50k</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="label">Max Risk</span>
+                    <span class="value" id="quickRisk">20%</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="label">Target</span>
+                    <span class="value" id="quickReturn">25%</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Asset Selection -->
+            <section class="dashboard-section">
+                <h2>Asset Selection</h2>
+                <div class="assets-controls">
+                    <input type="text" id="assetSearch" placeholder="Search assets...">
+                    <select id="assetFilter">
+                        <option value="all">All Assets</option>
+                        <option value="stocks">Stocks</option>
+                        <option value="bonds">Bonds</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="etf">ETFs</option>
+                    </select>
+                </div>
+                <div class="assets-grid" id="assetsGrid"></div>
+            </section>
+
+            <!-- DP Table Visualization -->
+            <section class="dashboard-section visualization-section">
+                <h2>Dynamic Programming Table</h2>
+                <div class="dp-visualization">
+                    <canvas id="dpTableCanvas"></canvas>
+                    <div class="dp-controls">
+                        <button class="btn btn-small" id="playDpBtn">▶ Play Animation</button>
+                        <button class="btn btn-small" id="resetDpBtn">⟲ Reset</button>
+                        <span class="animation-time">Time: <span id="animationTime">0ms</span></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Dashboard -->
+            <section class="dashboard-section results-section">
+                <h2>Optimization Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Selected Assets</h3>
+                        <div id="selectedAssets" class="result-content">
+                            <p class="placeholder">Run optimization to see results</p>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Portfolio Summary</h3>
+                        <div class="summary-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Total Investment</span>
+                                <span class="metric-value" id="totalInvestment">₹0</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Total Return</span>
+                                <span class="metric-value" id="totalReturn">₹0</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Total Risk</span>
+                                <span class="metric-value" id="totalRisk">0%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Efficiency Score</span>
+                                <span class="metric-value" id="efficiencyScore">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-card full-width">
+                        <h3>Portfolio Composition</h3>
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Algorithm Comparison -->
+            <section class="dashboard-section">
+                <h2>Algorithm Performance Comparison</h2>
+                <div class="comparison-table">
+                    <table id="comparisonTable">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Dynamic Programming</th>
+                                <th>Greedy Algorithm</th>
+                                <th>Advantage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Execution Time</td>
+                                <td id="dpTime">-</td>
+                                <td id="greedyTime">-</td>
+                                <td id="speedAdvantage">-</td>
+                            </tr>
+                            <tr>
+                                <td>Optimization Score</td>
+                                <td id="dpScore">-</td>
+                                <td id="greedyScore">-</td>
+                                <td id="scoreAdvantage">-</td>
+                            </tr>
+                            <tr>
+                                <td>Portfolio Return</td>
+                                <td id="dpReturn">-</td>
+                                <td id="greedyReturn">-</td>
+                                <td id="returnAdvantage">-</td>
+                            </tr>
+                            <tr>
+                                <td>Risk Adherence</td>
+                                <td id="dpRiskAdherence">-</td>
+                                <td id="greedyRiskAdherence">-</td>
+                                <td id="riskAdvantage">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <section class="dashboard-section actions">
+                <button class="btn btn-primary" id="exportBtn">📊 Export Report</button>
+                <button class="btn btn-secondary" id="downloadBtn">⬇ Download PDF</button>
+                <button class="btn btn-secondary" id="shareBtn">🔗 Share Results</button>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/algorithms/optimizer.js"></script>
+    <script src="assets/js/visualizations/dp-table.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

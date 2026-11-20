@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Visualization - Smart-Grow</title>
+    <meta name="description" content="Smart-Grow Investment Optimization Framework - Advanced Algorithm-Based Portfolio Optimization">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/algorithms.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Smart-Grow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="market-data.html" class="nav-link">Market Data</a></li>
+                <li><a href="algorithms.html" class="nav-link active">Algorithms</a></li>
+                <li><a href="results.html" class="nav-link">Results</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container" style="grid-template-columns: 1fr;">
+        <main class="main-content">
+            <!-- Header -->
+            <section class="algo-header">
+                <h1>Algorithm Visualization & Analysis</h1>
+                <p>Watch dynamic programming and greedy algorithms optimize your portfolio in real-time</p>
+            </section>
+
+            <!-- Algorithm Selection -->
+            <section class="algo-section">
+                <div class="algo-selector">
+                    <button class="algo-tab active" data-algo="dp">
+                        <span class="algo-icon">🗂️</span>
+                        <span>Dynamic Programming</span>
+                    </button>
+                    <button class="algo-tab" data-algo="greedy">
+                        <span class="algo-icon">⚡</span>
+                        <span>Greedy Algorithm</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- DP Algorithm Section -->
+            <section class="algo-section" id="dpSection">
+                <div class="algo-content">
+                    <div class="algo-info">
+                        <h2>Dynamic Programming - Knapsack Optimization</h2>
+                        <p class="algo-description">
+                            The Dynamic Programming approach solves the constrained optimization problem by building 
+                            a table of optimal subproblems. It ensures the global optimum is found by considering all 
+                            possible combinations within constraints.
+                        </p>
+                        <div class="algo-features">
+                            <div class="feature">
+                                <span class="feature-icon">✓</span>
+                                <span>Guaranteed optimal solution</span>
+                            </div>
+                            <div class="feature">
+                                <span class="feature-icon">✓</span>
+                                <span>Time Complexity: O(n × W)</span>
+                            </div>
+                            <div class="feature">
+                                <span class="feature-icon">✓</span>
+                                <span>Space Complexity: O(n × W)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visualization-container">
+                        <h3>DP Table Construction</h3>
+                        <div class="controls">
+                            <button class="btn btn-small" id="dpPlayBtn">▶ Play</button>
+                            <button class="btn btn-small" id="dpPauseBtn">⏸ Pause</button>
+                            <button class="btn btn-small" id="dpResetBtn">⟲ Reset</button>
+                            <input type="range" id="dpSpeedSlider" min="1" max="10" value="5" class="speed-slider">
+                        </div>
+                        <canvas id="dpTableVisualization"></canvas>
+                        <div class="animation-stats" id="dpStats">
+                            <div class="stat">
+                                <span class="label">Step:</span>
+                                <span class="value" id="dpStep">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Time:</span>
+                                <span class="value" id="dpTime">0ms</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Status:</span>
+                                <span class="value" id="dpStatus">Ready</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="backtracking-section">
+                        <h3>Optimal Solution Backtracking</h3>
+                        <div class="backtracking-visualization" id="dpBacktracking"></div>
+                        <div class="selected-items">
+                            <h4>Selected Items:</h4>
+                            <div class="items-list" id="dpSelected"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Greedy Algorithm Section -->
+            <section class="algo-section" id="greedySection" style="display: none;">
+                <div class="algo-content">
+                    <div class="algo-info">
+                        <h2>Greedy Algorithm - Fast Approximation</h2>
+                        <p class="algo-description">
+                            The Greedy approach selects assets with the best return-to-risk ratio sequentially. 
+                            While faster than DP, it may not guarantee the global optimum but provides good 
+                            approximations with minimal computation.
+                        </p>
+                        <div class="algo-features">
+                            <div class="feature">
+                                <span class="feature-icon">⚡</span>
+                                <span>Faster execution time</span>
+                            </div>
+                            <div class="feature">
+                                <span class="feature-icon">⚡</span>
+                                <span>Time Complexity: O(n log n)</span>
+                            </div>
+                            <div class="feature">
+                                <span class="feature-icon">⚠️</span>
+                                <span>May not find global optimum</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visualization-container">
+                        <h3>Sequential Asset Selection</h3>
+                        <div class="controls">
+                            <button class="btn btn-small" id="greedyPlayBtn">▶ Play</button>
+                            <button class="btn btn-small" id="greedyPauseBtn">⏸ Pause</button>
+                            <button class="btn btn-small" id="greedyResetBtn">⟲ Reset</button>
+                            <input type="range" id="greedySpeedSlider" min="1" max="10" value="5" class="speed-slider">
+                        </div>
+                        <canvas id="greedyVisualization"></canvas>
+                        <div class="animation-stats" id="greedyStats">
+                            <div class="stat">
+                                <span class="label">Step:</span>
+                                <span class="value" id="greedyStep">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Time:</span>
+                                <span class="value" id="greedyTime">0ms</span>
+                            </div>
+                            <div class="stat">
+                                <span class="label">Status:</span>
+                                <span class="value" id="greedyStatus">Ready</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selection-process">
+                        <h3>Selection Process</h3>
+                        <div class="selection-steps" id="greedySteps"></div>
+                        <div class="selected-items">
+                            <h4>Selected Items:</h4>
+                            <div class="items-list" id="greedySelected"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Section -->
+            <section class="algo-section">
+                <h2>Algorithm Comparison</h2>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h3>Performance Metrics</h3>
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <div class="comparison-card">
+                        <h3>Solution Quality</h3>
+                        <canvas id="qualityChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Dynamic Programming</th>
+                                <th>Greedy Algorithm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Optimality</td>
+                                <td><span class="badge badge-optimal">Optimal</span></td>
+                                <td><span class="badge badge-approx">Approximation</span></td>
+                            </tr>
+                            <tr>
+                                <td>Time Complexity</td>
+                                <td>O(n × W)</td>
+                                <td>O(n log n)</td>
+                            </tr>
+                            <tr>
+                                <td>Space Complexity</td>
+                                <td>O(n × W)</td>
+                                <td>O(n)</td>
+                            </tr>
+                            <tr>
+                                <td>Best For</td>
+                                <td>Accuracy-critical portfolios</td>
+                                <td>Quick recommendations</td>
+                            </tr>
+                            <tr>
+                                <td>Scalability</td>
+                                <td>Limited (W must be moderate)</td>
+                                <td>Excellent</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Case Study -->
+            <section class="algo-section">
+                <h2>Case Study: Real-World Example</h2>
+                <div class="case-study">
+                    <div class="case-input">
+                        <h3>Input Parameters</h3>
+                        <div class="input-list" id="caseInput"></div>
+                    </div>
+                    <div class="case-results">
+                        <h3>Results Comparison</h3>
+                        <div class="results-list" id="caseResults"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complexity Analysis -->
+            <section class="algo-section">
+                <h2>Complexity Analysis</h2>
+                <div class="complexity-charts">
+                    <div class="chart-wrapper">
+                        <h3>Time Complexity vs Problem Size</h3>
+                        <canvas id="timeComplexityChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Space Complexity Comparison</h3>
+                        <canvas id="spaceComplexityChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/algorithms/optimizer.js"></script>
+    <script src="assets/js/visualizations/algorithm-animator.js"></script>
+    <script src="assets/js/algorithms-page.js"></script>
+</body>
+</html>

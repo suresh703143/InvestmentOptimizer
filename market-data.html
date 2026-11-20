@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Data - Smart-Grow</title>
+    <meta name="description" content="Smart-Grow Investment Optimization Framework - Advanced Algorithm-Based Portfolio Optimization">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/market-data.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Smart-Grow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="market-data.html" class="nav-link active">Market Data</a></li>
+                <li><a href="algorithms.html" class="nav-link">Algorithms</a></li>
+                <li><a href="results.html" class="nav-link">Results</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container" style="grid-template-columns: 1fr;">
+        <main class="main-content">
+            <!-- Market Overview -->
+            <section class="market-section">
+                <h1>Market Data & Analysis</h1>
+                <div class="market-summary">
+                    <div class="summary-card">
+                        <div class="summary-icon">📈</div>
+                        <div class="summary-info">
+                            <span class="summary-label">Market Status</span>
+                            <span class="summary-value">Open</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">💹</div>
+                        <div class="summary-info">
+                            <span class="summary-label">Last Update</span>
+                            <span class="summary-value" id="lastUpdate">Just now</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">🌍</div>
+                        <div class="summary-info">
+                            <span class="summary-label">Global Assets</span>
+                            <span class="summary-value">500+</span>
+                        </div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">⚡</div>
+                        <div class="summary-info">
+                            <span class="summary-label">Data Refresh</span>
+                            <span class="summary-value">Real-time</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters and Controls -->
+            <section class="controls-section">
+                <div class="search-bar">
+                    <input type="text" id="searchAsset" placeholder="Search by symbol or name...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="filters">
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="tech">Technology</option>
+                        <option value="finance">Finance</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="energy">Energy</option>
+                        <option value="crypto">Cryptocurrency</option>
+                    </select>
+                    <select id="priceRangeFilter">
+                        <option value="all">All Price Ranges</option>
+                        <option value="under50">Under ₹50</option>
+                        <option value="50-200">₹50 - ₹200</option>
+                        <option value="200-500">₹200 - ₹500</option>
+                        <option value="above500">Above ₹500</option>
+                    </select>
+                    <select id="volatilityFilter">
+                        <option value="all">All Volatility</option>
+                        <option value="low">Low (0-10%)</option>
+                        <option value="medium">Medium (10-20%)</option>
+                        <option value="high">High (20%+)</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Trending Assets -->
+            <section class="market-section">
+                <h2>🔥 Trending Assets</h2>
+                <div class="assets-carousel" id="trendingAssets"></div>
+            </section>
+
+            <!-- Asset Grid -->
+            <section class="market-section">
+                <div class="section-header">
+                    <h2>Available Assets</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">⊞ Grid</button>
+                        <button class="view-btn" data-view="list">≡ List</button>
+                    </div>
+                </div>
+                <div class="assets-grid" id="assetsGrid"></div>
+            </section>
+
+            <!-- Asset Details Modal -->
+            <div class="asset-modal" id="assetModal">
+                <div class="modal-content">
+                    <button class="modal-close">✕</button>
+                    <div class="modal-header">
+                        <h2 id="modalSymbol"></h2>
+                        <span id="modalName"></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="chart-container">
+                            <canvas id="assetChart"></canvas>
+                        </div>
+                        <div class="asset-details">
+                            <div class="detail-grid">
+                                <div class="detail">
+                                    <span class="detail-label">Current Price</span>
+                                    <span class="detail-value" id="currentPrice">₹0</span>
+                                </div>
+                                <div class="detail">
+                                    <span class="detail-label">24h Change</span>
+                                    <span class="detail-value" id="dayChange">0%</span>
+                                </div>
+                                <div class="detail">
+                                    <span class="detail-label">YTD Return</span>
+                                    <span class="detail-value" id="ytdReturn">0%</span>
+                                </div>
+                                <div class="detail">
+                                    <span class="detail-label">Volatility</span>
+                                    <span class="detail-value" id="volatility">0%</span>
+                                </div>
+                                <div class="detail">
+                                    <span class="detail-label">Market Cap</span>
+                                    <span class="detail-value" id="marketCap">₹0</span>
+                                </div>
+                                <div class="detail">
+                                    <span class="detail-label">52w High</span>
+                                    <span class="detail-value" id="high52w">₹0</span>
+                                </div>
+                            </div>
+                            <div class="asset-description">
+                                <h3>About</h3>
+                                <p id="assetDescription"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" id="modalCloseBtn">Close</button>
+                        <button class="btn btn-primary" id="selectAssetBtn">Select Asset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heatmap -->
+            <section class="market-section">
+                <h2>Market Heatmap</h2>
+                <div class="heatmap-container" id="heatmapContainer"></div>
+            </section>
+
+            <!-- Market Insights -->
+            <section class="market-section">
+                <h2>📊 Market Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <h3>Top Performers</h3>
+                        <ul id="topPerformers" class="insight-list"></ul>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Most Volatile</h3>
+                        <ul id="mostVolatile" class="insight-list"></ul>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Best for Risk</h3>
+                        <ul id="bestRisk" class="insight-list"></ul>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Market Sentiment</h3>
+                        <div class="sentiment-gauge">
+                            <div class="sentiment-bar">
+                                <div class="sentiment-fill" id="sentimentFill"></div>
+                            </div>
+                            <div class="sentiment-labels">
+                                <span>Bearish</span>
+                                <span id="sentimentValue">Neutral</span>
+                                <span>Bullish</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Metrics Comparison -->
+            <section class="market-section">
+                <h2>Asset Metrics Comparison</h2>
+                <div class="comparison-charts">
+                    <div class="chart-wrapper">
+                        <h3>Return vs Risk</h3>
+                        <canvas id="returnRiskChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Historical Correlation</h3>
+                        <canvas id="correlationChart"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/market-data.js"></script>
+</body>
+</html>
